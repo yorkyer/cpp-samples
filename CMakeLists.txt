@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(cpp-samples)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -21,3 +21,4 @@ conan_basic_setup(TARGETS)
 add_subdirectory(cppitertools)
 add_subdirectory(backward-cpp)
 add_subdirectory(pprint)
+add_subdirectory(sanitize)
