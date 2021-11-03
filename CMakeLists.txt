@@ -9,11 +9,15 @@ include_directories(external/include)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
-add_subdirectory(cppitertools)
-add_subdirectory(backward-cpp)
-
+# Global variables for conan libs.
+################################
 # include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 # conan_basic_setup()
 
 # add_executable(cpp main.cpp)
 # target_link_libraries(cpp ${CONAN_LIBS})
+################################
+
+add_subdirectory(cppitertools)
+add_subdirectory(backward-cpp)
+add_subdirectory(pprint)
