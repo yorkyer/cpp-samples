@@ -21,6 +21,7 @@ target_link_libraries(\${PROJECT_NAME} CONAN_PKG::${name})
 EOF
 
 cat <<EOF > main.cpp
+#include <iostream>
 #include <${name}.hpp>
 
 using namespace std;
