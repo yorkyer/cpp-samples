@@ -17,7 +17,7 @@
 
 // - apt-get install libdw-dev ...
 // - g++/clang++ -ldw ...
-// #define BACKWARD_HAS_DW 1
+#define BACKWARD_HAS_DW 1
 
 // - apt-get install binutils-dev ...
 // - g++/clang++ -lbfd ...
@@ -31,7 +31,7 @@
 // for potentially more detailed stack traces you can use libunwind
 // - apt-get install libunwind-dev
 // - g++/clang++ -lunwind
-// #define BACKWARD_HAS_LIBUNWIND 1
+#define BACKWARD_HAS_LIBUNWIND 1
 
 #include "backward.hpp"
 
