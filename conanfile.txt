@@ -3,6 +3,7 @@ benchmark/1.6.0
 taywee-args/6.2.7
 spdlog/1.9.2
 nlohmann_json/3.10.4
+mio/cci.20201220
 fast-cpp-csv-parser/cci.20200830
 rapidcsv/8.53
 boost/1.77.0
