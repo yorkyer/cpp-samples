@@ -17,13 +17,29 @@ cat <<EOF > CMakeLists.txt
 project(${name})
 
 add_executable(\${PROJECT_NAME} main.cpp)
-target_link_libraries(\${PROJECT_NAME} PRIVATE CONAN_PKG::backward-cpp)
+target_link_libraries(\${PROJECT_NAME} PRIVATE 
+        CONAN_PKG::backward-cpp 
+        CONAN_PKG::spdlog 
+        CONAN_PKG::fmt 
+        CONAN_PKG::pystring
+        CONAN_PKG::taywee-args
+        CONAN_PKG::spy
+        CONAN_PKG::doctest
+        CONAN_PKG::mio)
 EOF
 
 cat <<EOF > main.cpp
 #include <bits/stdc++.h> 
 #include <pprint.hpp>
 #include <backward.hpp>
+#include <spdlog/spdlog.h>
+#include <pystring.h>
+#include <mio/mmap.hpp>
+#include <spy/spy.hpp>
+#include <args.hxx>
+#include <tscns.h>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
 
 namespace backward
 {
