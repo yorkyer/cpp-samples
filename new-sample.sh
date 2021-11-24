@@ -24,7 +24,6 @@ target_link_libraries(\${PROJECT_NAME} PRIVATE
         CONAN_PKG::pystring
         CONAN_PKG::taywee-args
         CONAN_PKG::spy
-        CONAN_PKG::doctest
         CONAN_PKG::mio)
 EOF
 
@@ -38,15 +37,16 @@ cat <<EOF > main.cpp
 #include <spy/spy.hpp>
 #include <args.hxx>
 #include <tscns.h>
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
+
 
 namespace backward
 {
     backward::SignalHandling sh;
 }
 
+
 using namespace std;
+
 
 #define P(...) \\
 do { \\
@@ -55,6 +55,7 @@ do { \\
     printer.compact(false); \\
     printer.print(__VA_ARGS__); \\
 } while (0)
+
 
 
 int main(int argc, char **argv)
