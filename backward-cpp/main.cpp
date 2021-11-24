@@ -1,5 +1,3 @@
-#include <backward.hpp>
-
 using namespace std;
 
 void f3()
