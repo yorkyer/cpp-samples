@@ -1,6 +1,4 @@
-project(tmp)
-
-find_package(OpenMP)
+project(nano-bench)
 
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE 
@@ -10,5 +8,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         CONAN_PKG::pystring
         CONAN_PKG::taywee-args
         CONAN_PKG::spy
-        CONAN_PKG::mio
-        OpenMP::OpenMP_CXX)
+        CONAN_PKG::mio)
+target_compile_options(${PROJECT_NAME} PRIVATE -m64 -mavx2 -mfma)

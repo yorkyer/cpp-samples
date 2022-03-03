@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(cpp-samples)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
 include_directories(external/include)
 
@@ -37,7 +38,8 @@ add_subdirectory(orderedArray-orderedDeque-map-benchmark)
 add_subdirectory(decltype)
 add_subdirectory(log)
 add_subdirectory(mio)
-add_subdirectory(tmp)
+add_subdirectory(obfuscator)
 add_subdirectory(unordered_set-vector-benchmark)
 add_subdirectory(unordered_map-vector_pair-benchmark)
 add_subdirectory(concurrentqueue)
+add_subdirectory(nano-bench)
