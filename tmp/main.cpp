@@ -7,6 +7,8 @@
 #include <spy/spy.hpp>
 #include <args.hxx>
 #include <tscns.h>
+#include <unistd.h>
+#include <ctime>
 
 
 namespace backward
@@ -27,9 +29,43 @@ do { \
 } while (0)
 
 
+using std::chrono::microseconds;
+using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
 
-int main(int argc, char **argv)
+long long getTime() {
+    return duration_cast<microseconds>(high_resolution_clock::now().time_since_epoch()).count();
+}
+
+void f(high_resolution_clock::duration du)
 {
+    long long before = getTime();
+    std::this_thread::sleep_until(high_resolution_clock::now() + du);
+    long long after = getTime();
+    std::cout << before << std::endl;
+    std::cout << after << std::endl;
+    std::cout << after - before << std::endl;
+}
 
-    return 0;
+long long TIME;
+
+void accurate_sleep(long long du) {
+    long long before = getTime();
+    if (du <= 0) {
+        long long after = getTime();
+        std::cout << before << std::endl;
+        std::cout << after << std::endl;
+        std::cout << after - before << std::endl;
+        return;
+    }
+    while (true) {
+        long long time = getTime();
+        if (time - before >= du) {
+            break;
+        }
+    }
+    long long after = getTime();
+    std::cout << before << std::endl;
+    std::cout << after << std::endl;
+    std::cout << after - before << std::endl;
 }

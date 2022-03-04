@@ -1,6 +1,6 @@
 #include "SString.hpp"
 
-const SString<89,87,95,88,90,70,93,65,88,81> A;
+const SString A{105,103,111,104,106,118,109,113,104,97};
 
 int main() {
     std::cout << A << std::endl;

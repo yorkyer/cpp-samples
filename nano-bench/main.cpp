@@ -37,6 +37,13 @@ void print(Vec &vector, Str &name) {
               << vector[std::round(vector.size() * 0.95)] << "\n";
 }
 
+using std::chrono::microseconds;
+using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
+
+inline long long getTime() {
+    return duration_cast<microseconds>(high_resolution_clock::now().time_since_epoch()).count();
+}
 
 int main(int argc, char **argv) {
     TSCNS tn;
@@ -44,32 +51,19 @@ int main(int argc, char **argv) {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     tn.calibrate();
 
-    std::vector<int64_t> vsum_diffs;
-    std::vector<int64_t> sum_diffs;
-    __m256 v;
+    std::vector<int64_t> time_diffs;
 
     for (int i = 0; i < count; ++i) {
         auto start = tn.rdns();
 
-        vsum(v);
+        getTime();
 
         auto finish = tn.rdns();
         auto diff = finish - start;
-        vsum_diffs.push_back(diff);
+        time_diffs.push_back(diff);
     }
 
-    for (int i = 0; i < count; ++i) {
-        auto start = tn.rdns();
-
-        sum(v);
-
-        auto finish = tn.rdns();
-        auto diff = finish - start;
-        sum_diffs.push_back(diff);
-    }
-
-    print(vsum_diffs, "vsum");
-    print(sum_diffs, "sum");
+    print(time_diffs, "time");
 
     return 0;
 }
