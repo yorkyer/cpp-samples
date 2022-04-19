@@ -58,6 +58,18 @@ struct A {
     std::vector<person> ps;
 };
 
+namespace ns {
+    class address {
+      private:
+        std::string street;
+        int housenumber;
+        int postcode;
+
+      public:
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(address, street, housenumber, postcode)
+    };
+}
+
 int main(int argc, char **argv)
 {
     // create a person
