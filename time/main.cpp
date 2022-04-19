@@ -47,10 +47,35 @@ int time2timestamp(const std::string &time) {
     return hour * 10000000 + minute * 100000 + second * 1000 + millisecond;
 }
 
+//1561425612923541 (2019-06-25T01:20:12.923541 -> 092012923
+int getTimeFromTimestamp(long long ts) {
+    long long microsecond = ts % 1000000;
+    ts /= 1000000;
+    ts %= (24 * 60 * 60);
+    int hour = ts / (60 * 60) + 8;
+    ts %= (60 * 60);
+    int minute = ts / 60;
+    ts %= 60;
+    int second = ts;
+    return hour * 10000000 + minute * 100000 + second * 1000 + microsecond / 1000;
+}
+
+int getDateFromTimestamp(long long ts, bool isNano = false) {
+    if (isNano) {
+        ts /= 1000;
+    }
+    std::time_t seconds = ts / 1000000;
+    std::tm datetime = *std::localtime(&seconds);
+    return (1900 + datetime.tm_year) * 10000 + (1 + datetime.tm_mon) * 100 + datetime.tm_mday;
+}
+
 int main(int argc, char **argv)
 {
-    auto timestamp = utc2timestamp("2019-06-25T01:20:12.923541588Z");
-    std::cout << timestamp;
+    // auto timestamp = utc2timestamp("2019-06-25T01:20:12.923541588Z");
+    // std::cout << timestamp << std::endl;
+    double t = (double) 1629775591721377;
+    std::cout << (long long)t;
+    // std::cout << getDateFromTimestamp(1629775591721377415, true) << std::endl;
     // std::cout << time2timestamp("03:56:44.325000000");
     return 0;
 }
