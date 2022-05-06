@@ -7,6 +7,7 @@
 #include <spy/spy.hpp>
 #include <args.hxx>
 #include <tscns.h>
+#include <ctime>
 
 
 namespace backward
@@ -65,7 +66,8 @@ int getDateFromTimestamp(long long ts, bool isNano = false) {
         ts /= 1000;
     }
     std::time_t seconds = ts / 1000000;
-    std::tm datetime = *std::localtime(&seconds);
+    std::tm datetime;
+    ::localtime_r(&seconds, &datetime);
     return (1900 + datetime.tm_year) * 10000 + (1 + datetime.tm_mon) * 100 + datetime.tm_mday;
 }
 
@@ -74,8 +76,8 @@ int main(int argc, char **argv)
     // auto timestamp = utc2timestamp("2019-06-25T01:20:12.923541588Z");
     // std::cout << timestamp << std::endl;
     double t = (double) 1629775591721377;
-    std::cout << (long long)t;
-    // std::cout << getDateFromTimestamp(1629775591721377415, true) << std::endl;
+    // std::cout << (long long)t;
+    std::cout << getDateFromTimestamp(1629775591721377415, true) << std::endl;
     // std::cout << time2timestamp("03:56:44.325000000");
     return 0;
 }

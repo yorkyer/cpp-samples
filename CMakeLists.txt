@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(cpp-samples)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable")
 
 include_directories(external/include)
 
@@ -53,3 +53,4 @@ add_subdirectory(time)
 add_subdirectory(regex)
 add_subdirectory(print-macro)
 add_subdirectory(dlfcn)
+add_subdirectory(conv)
