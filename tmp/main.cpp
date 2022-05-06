@@ -26,8 +26,8 @@ do { \
     printer.print(__VA_ARGS__); \
 } while (0)
 
-
 int main() {
-    std::cout << __TIME__;
+    
+
     return 0;
 }
