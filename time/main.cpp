@@ -49,7 +49,10 @@ int time2timestamp(const std::string &time) {
 }
 
 //1561425612923541 (2019-06-25T01:20:12.923541 -> 092012923
-int getTimeFromTimestamp(long long ts) {
+int getTimeFromTimestamp(long long ts, bool isNano = false) {
+    if (isNano) {
+        ts /= 1000;
+    }
     long long microsecond = ts % 1000000;
     ts /= 1000000;
     ts %= (24 * 60 * 60);
@@ -77,7 +80,9 @@ int main(int argc, char **argv)
     // std::cout << timestamp << std::endl;
     double t = (double) 1629775591721377;
     // std::cout << (long long)t;
-    std::cout << getDateFromTimestamp(1629775591721377415, true) << std::endl;
+    std::cout << getDateFromTimestamp(1627956303025000000, true) << std::endl;
+    std::cout << getTimeFromTimestamp(1627956303025000000, true) << std::endl;
+    std::cout << getTimeFromTimestamp(1627956303129945598, true) << std::endl;
     // std::cout << time2timestamp("03:56:44.325000000");
     return 0;
 }

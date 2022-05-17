@@ -13,11 +13,11 @@ void f()
 
 int main(int argc, char **argv)
 {
-    vector<thread> threads;
-    threads.emplace_back(thread(f));
-    threads.emplace_back(thread(f));
-    threads.emplace_back(thread(f));
-    threads.emplace_back(thread(f));
+    std::vector<std::thread> threads;
+    threads.emplace_back(std::thread(f));
+    threads.emplace_back(std::thread(f));
+    threads.emplace_back(std::thread(f));
+    threads.emplace_back(std::thread(f));
 
     for (auto &t : threads) t.join();
     return 0;
