@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 project(cpp-samples)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -mavx2 -mfma")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable")
 
 include_directories(external/include)
@@ -57,3 +59,4 @@ add_subdirectory(conv)
 add_subdirectory(eigen)
 add_subdirectory(cpu)
 add_subdirectory(asm)
+add_subdirectory(gemv)

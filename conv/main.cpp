@@ -126,7 +126,7 @@ void gemv4_prepare_b(float *b, float *dst) {
 }
 
 
-int prepare(int argc, char **argv)
+int prepare()
 {
     const int SIZE = 10000;
     float a[SIZE];
@@ -137,11 +137,11 @@ int prepare(int argc, char **argv)
         b[i] = 0;
     }
 
-    gemv4_prepare_b<32, 8>(a, b);
+    gemv4_prepare_b<64, 8>(a, b);
 
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < 64 * 8; i++) {
         fmt::print("{} ", b[i]);
-        if (i % 50 == 0) {
+        if ((i+1) % 64 == 0) {
             fmt::print("\n");
         }
     }
@@ -152,7 +152,7 @@ int prepare(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-    forward_pre();
+    prepare();
 
     return 0;
 }
