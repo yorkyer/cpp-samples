@@ -14,10 +14,10 @@ void f()
 int main(int argc, char **argv)
 {
     std::vector<std::thread> threads;
-    threads.emplace_back(std::thread(f));
-    threads.emplace_back(std::thread(f));
-    threads.emplace_back(std::thread(f));
-    threads.emplace_back(std::thread(f));
+    threads.emplace_back(f);
+    threads.emplace_back(f);
+    threads.emplace_back(f);
+    threads.emplace_back(f);
 
     for (auto &t : threads) t.join();
     return 0;
