@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    fmt::print("The answer is {:#<10.2f}.\n", 42.24243);
+    fmt::print("The answer is {:#<10.2f}.\n", 42.24643);
     fmt::print("Don't {}\n", "panic");
     fmt::print(stderr, "System error code = {}\n", errno);
     fmt::print("I'd rather be {1} than {0}.\n", "right", "happy");
