@@ -43,14 +43,13 @@ static void vsum_bench(benchmark::State &state)
 {
   // Perform setup here
   long long s = 0;
-  int i = 0;
   for (auto _ : state)
   {
-    i++;
+    
     // This code gets timed
-    flush_cache_2();
+    flush_cache();
   }
-  state.counters["i"] = benchmark::Counter(i);
+  // state.counters["i"] = benchmark::Counter(i);
 }
 
 static void sum_bench(benchmark::State &state)

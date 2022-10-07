@@ -52,6 +52,9 @@ namespace ns {
 //     a.b = j.at("b").get<std::vector<int>>();
 // }
 
+/** @important 
+  * The functions from_json and to_json must be defined in the same namespace as the type. They must not be member functions.
+  */
 using namespace ns;
 
 struct A {
@@ -73,26 +76,26 @@ namespace ns {
 int main(int argc, char **argv)
 {
     // create a person
-person p {"Ned Flanders", "744 Evergreen Terrace", 60};
-person p2 {"Nedfeafafear Flanders", "744 Evergreen Terrace", 60};
+    person p {"Ned Flanders", "744 Evergreen Terrace", 60};
+    person p2 {"Nedfeafafear Flanders", "744 Evergreen Terrace", 60};
 
-// conversion: person -> json
-json j;
-std::vector<person> ps = {p, p, p, p};
-j.push_back(ps);
-j.push_back(3);
-j.push_back(4);
-j.push_back(ps);
+    // conversion: person -> json
+    json j;
+    // std::vector<person> ps = {p, p, p, p};
+    // j.push_back(ps);
+    j.push_back(3);
+    j.push_back("hello");
+    // j.push_back(ps);
 
-std::cout << j << std::endl;
-// {"address":"744 Evergreen Terrace","age":60,"name":"Ned Flanders"}
+    std::cout << j << std::endl;
+    // {"address":"744 Evergreen Terrace","age":60,"name":"Ned Flanders"}
 
-// conversion: json -> person
-A a;
-a.ps = {p2, p2};
-j.at(3).get_to<std::vector<person>>(a.ps);
-std::cout << a.ps.size() << std::endl;
-std::cout << ps.size() << std::endl;
+    // conversion: json -> person
+    // A a;
+    // a.ps = {p2, p2};
+    // j.at(3).get_to<std::vector<person>>(a.ps);
+    // std::cout << a.ps.size() << std::endl;
+    // std::cout << ps.size() << std::endl;
 
 
     return 0;

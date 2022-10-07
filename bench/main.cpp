@@ -7,6 +7,7 @@
 #include <spy/spy.hpp>
 #include <args.hxx>
 #include <tscns.h>
+#include <immintrin.h>
 #include "LatencyStat.hpp"
 
 
@@ -27,11 +28,12 @@ do { \
     printer.print(__VA_ARGS__); \
 } while (0)
 
-
-constexpr int COUNT = 1000;
-constexpr int PASS = 3;
-TSCNS tscns;
-
+inline int64_t rdtsc()
+{
+    uint64_t rax, rdx, aux;
+    asm volatile ( "rdtscp\n" : "=a" (rax), "=d" (rdx), "=c" (aux) : : );
+    return (rdx << 32) + rax;
+}
 
 constexpr static int L3_CACHE_SIZE = 40 * 1024 * 1024;
 std::vector<float> big_array(L3_CACHE_SIZE / sizeof(float));
@@ -41,52 +43,50 @@ void flush_cache() {
         sum += big_array[i];
 }
 
-struct A {
-    int a;
-    int b;
-};
-A a;
 
-void bench(int size)
+constexpr int PASS = 1000;
+std::vector<int64_t> diffs(PASS);
+
+
+__m256i tmp;
+__m256i tmp2;
+alignas(128) int mem[64];
+
+void bench()
 {
-    {   
-        std::vector<A> v;
-        LatencyStat stat("f1", COUNT);
-        for (int i = 0; i < PASS * COUNT; i++) {
-            flush_cache();
-            auto t0 = tscns.rdns();
-            A a;
-            a.a = 1;
-            a.b = 2;
-            v.push_back(a);
-            auto t1 = tscns.rdns();
-            stat.stat(t1 - t0, true);
-        }
-        sum += v.size();
-    }
+    for (int i = 0; i < PASS; i++) {
+        // flush_cache();
+        auto start = rdtsc();
+        
+        _mm256_stream_si256((__m256i *)mem, tmp);
 
-    {
-        std::vector<A> v;
-        LatencyStat stat("f2", COUNT);
-        for (int i = 0; i < PASS * COUNT; i++) {
-            flush_cache();
-            auto t0 = tscns.rdns();
-            v.emplace_back(1, 2);
-            auto t1 = tscns.rdns();
-            stat.stat(t1 - t0, true);
-        }
-        sum += v.size();
+        auto end = rdtsc();
+        diffs[i] = end - start;
     }
+    std::sort(diffs.begin(), diffs.end());
+    std::cout << "no_warmup," << diffs[(int) (PASS * 0.05)] << "," << diffs[(int) (PASS * 0.5)] << ","
+              << diffs[(int) (PASS * 0.95)] << std::endl;
 }
 
+void bench2()
+{
+    for (int i = 0; i < PASS; i++) {
+        // flush_cache();
+        auto start = rdtsc();
+        
+        _mm256_store_si256((__m256i *)mem, tmp2);
 
+        auto end = rdtsc();
+        diffs[i] = end - start;
+    }
+    std::sort(diffs.begin(), diffs.end());
+    std::cout << "no_warmup," << diffs[(int) (PASS * 0.05)] << "," << diffs[(int) (PASS * 0.5)] << ","
+              << diffs[(int) (PASS * 0.95)] << std::endl;
+}
 
 int main(int argc, char **argv)
 {
-    tscns.init();
-    bench(100);    
-
-    std::cout << sum << std::endl;
-    
+    bench();    
+    bench2();    
     return 0;
 }

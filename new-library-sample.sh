@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip#!/usr/bin/env bash
 
 if [[ $# -ne 1 ]]; then
     echo "Usage: ./new-sample.sh <library>"

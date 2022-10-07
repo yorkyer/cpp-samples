@@ -57,16 +57,26 @@ void PrintInfo(T x)
     }
 }
 
+template <int a = 2> 
+void f() {
+    P("2");
+}
+
+template <int a = 3> 
+void f() {
+    P("3");
+}
+
+template <>
+void f() {
+    P(".");
+}
+
 int main(int argc, char **argv)
 {
-    P(fibonacci<45>(45));
+    f();
+    f<2>();
+    f<3>();
 
-    std::string val1 = "foo";
-    int val2 = 42;
-    double val3 = 5.8;
- 
-    PrintInfo(val1);
-    PrintInfo(val2);
-    PrintInfo(val3);  
     return 0;
 }
