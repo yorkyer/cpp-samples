@@ -20,7 +20,7 @@ public:
         clear();
     }
 
-    void PrivateOrderMessage.cpppush_back(int time_idx, const T &elem)
+    void push_back(int time_idx, const T &elem)
     {
         if (queue_.empty()) {
             queue_.push_back({time_idx, elem});
@@ -34,11 +34,6 @@ public:
 
         expire();
         update_pos();
-
-        std::cout << "lag_positions: ";
-        for (size_t lag_idx = 0; lag_idx < lag_periods_.size(); lag_idx++)
-            std::cout << lag_positions_[lag_idx] << " ";
-        std::cout << std::endl;
     }
 
     void clear()
@@ -130,7 +125,7 @@ private:
     std::vector<int> lag_periods_;
     std::vector<int> lag_positions_;
     int max_lag_period_{0};
-    T default_value_;
+    T default_value_{};
 };
 
 }
