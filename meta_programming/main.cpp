@@ -57,26 +57,11 @@ void PrintInfo(T x)
     }
 }
 
-template <int a = 2> 
-void f() {
-    P("2");
-}
 
-template <int a = 3> 
-void f() {
-    P("3");
-}
 
-template <>
-void f() {
-    P(".");
-}
 
 int main(int argc, char **argv)
 {
-    f();
-    f<2>();
-    f<3>();
 
     return 0;
 }

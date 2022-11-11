@@ -27,13 +27,13 @@ do { \
 } while (0)
 
 
-template < template< typename K, typename V> typename Container >
-class PairContainer {
-    Container container;
+// template < template< typename K, typename V> typename Container >
+// class PairContainer {
+//     Container container;
 
-    Container::iterator begin() { return container.begin(); }
-    Container::iterator end() { return container.end(); }
-};
+//     Container::iterator begin() { return container.begin(); }
+//     Container::iterator end() { return container.end(); }
+// };
 
 
 int main(int argc, char **argv)

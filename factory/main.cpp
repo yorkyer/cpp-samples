@@ -7,7 +7,7 @@
 #include <spy/spy.hpp>
 #include <args.hxx>
 #include <tscns.h>
-
+#include <dlfcn.h>
 
 namespace backward
 {
@@ -27,6 +27,16 @@ do { \
 } while (0)
 
 
+class A {
+
+};
+
+static int getA() { 
+    P("hello");
+    return 3;
+}
+
+static int a = getA();
 
 int main(int argc, char **argv)
 {

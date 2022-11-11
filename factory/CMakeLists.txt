@@ -9,3 +9,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         CONAN_PKG::taywee-args
         CONAN_PKG::spy
         CONAN_PKG::mio)
+
+include_directories(.)
+
+add_library(liba SHARED liba.cpp)
+add_library(libb SHARED libb.cpp)
