@@ -32,6 +32,7 @@ arrow/7.0.0
 absent/0.3.1
 abseil/20210324.2
 eigen/3.4.0
+openssl/1.1.1l
 
 [generators]
 cmake

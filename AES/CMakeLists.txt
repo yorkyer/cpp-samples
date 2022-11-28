@@ -1,6 +1,4 @@
-project(factory)
-
-include_directories(.)
+project(AES)
 
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE 
@@ -10,8 +8,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         CONAN_PKG::pystring
         CONAN_PKG::taywee-args
         CONAN_PKG::spy
+        CONAN_PKG::openssl
         CONAN_PKG::mio)
-add_link_options("-dynamic-list=symbols")
-
-add_library(liba SHARED liba.cpp)
-add_library(libb SHARED libb.cpp)
