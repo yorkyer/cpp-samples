@@ -7,8 +7,6 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 #define AES_GCM_NONCE_SIZE 12
 
 inline bool
@@ -132,14 +130,14 @@ void test()
     //create a sample key
     unsigned char key_bytes[16];
     RAND_bytes(key_bytes, sizeof(key_bytes));
-    string key = string((char *)key_bytes, sizeof(key_bytes));
+    std::string key = std::string((char *)key_bytes, sizeof(key_bytes));
  
     //text to encrypt
-    string plaintext= "elephants in space";
-    cout << plaintext << endl;
+    std::string plaintext= "elephants in space";
+    std::cout << plaintext << std::endl;
  
     //encrypt
-    string ciphertext;
+    std::string ciphertext;
     if (!AESGCMEncrypt(plaintext, &ciphertext, key)) {
         std::cerr << "encryption failed\n";
     }
@@ -148,15 +146,15 @@ void test()
     static const char *chars="0123456789ABCDEF";
     for(int i=0; i<ciphertext.size(); i++)
     {
-        cout << chars[ciphertext[i]/16];
-        cout << chars[ciphertext[i]%16];
+        std::cout << chars[ciphertext[i]/16];
+        std::cout << chars[ciphertext[i]%16];
     }
-    cout << endl;
+    std::cout << std::endl;
  
     //decrypt
-    string out;
+    std::string out;
     bool suc = AESGCMDecrypt(ciphertext, &out, key);
-    cout << out << endl;
+    std::cout << out << std::endl;
 }
 
 std::string string_to_hex(const std::string& input)
