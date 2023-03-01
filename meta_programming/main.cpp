@@ -63,6 +63,7 @@ void PrintInfo(T x)
 
 template <class T>
 auto call_foo_imp(T t, int) -> decltype(std::declval<T>().foo(), void()) {
+    t.foo();
     std::cout << "has foo\n";
 }
 
@@ -76,7 +77,7 @@ auto call_foo(T t) -> decltype(call_foo_imp(t, 0), void()) {
     call_foo_imp(t, 0);
 }
 
-struct X{ void foo(){} };
+struct X{ void foo(){ std::cout << "\nfoo\n"; } };
 struct Y{};
 
 int main(int argc, char **argv)
